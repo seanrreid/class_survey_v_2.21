@@ -1,7 +1,5 @@
 # Class Survey version 2.21 (February 2021)
 
-Available as a [GIST](https://gist.github.com/seanrreid/ab34e28eb30409b51d5c53f17e94c827)
-
 We're going to create an app to rank our understanding of the following topics:
 
 - HTML
