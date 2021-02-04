@@ -24,7 +24,7 @@ class ClassInfo {
 
   static async getAllStatuses() {
     try {
-      const response = await db.any(`SELECT * FROM class_status;`);
+      const response = await db.any(`SELECT * FROM class_status ORDER BY rank;`);
       return response;
     } catch (error) {
       console.error("ERROR: ", error);

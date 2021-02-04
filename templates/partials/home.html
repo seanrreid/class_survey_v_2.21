@@ -1,33 +1,18 @@
 <h1>${title}</h1>
-${classInfoData.map(entry => { return `
-<p>I am <strong>${entry.status_title}</strong> at ${entry.topic_name}. ${entry.rank} STARS!</p>
-` }).join('')}
-<hr />
 <form name="survey-form" action="/" method="POST" class="form">
-    I am changing my HTML score. I am now:<br />
-    <label
-        >Awesome
-        <input type="radio" value="1" name="topic_ranking_id" />
-    </label>
-    <label
-        >Great
-        <input type="radio" value="2" name="topic_ranking_id" />
-    </label>
-    <label
-        >Good
-        <input type="radio" value="3" name="topic_ranking_id" />
-    </label>
-    <label
-        >Okay
-        <input type="radio" value="4" name="topic_ranking_id" />
-    </label>
-    <label
-        >Poor
-        <input type="radio" value="5" name="topic_ranking_id" />
-    </label>
-    <label
-        >Unranked
-        <input type="radio" value="6" name="topic_ranking_id" />
-    </label>
+    ${classInfoData.map(topic => { return `
+        <p>
+            I am <strong>${topic.status_title}</strong> at ${topic.topic_name}.
+            ${topic.rank} STARS!
+            <hr/>
+            <h2>New Score:</h2>
+            ${statusData.map(status => { return `
+                <label>
+                    ${status.status_title}
+                    <input type="radio" name="${topic.topic_name}" ${topic.status_id === status.id ? 'checked' : ''} value=${status.id} />
+                </label>
+            ` }).join('')}
+        </p>
+    ` }).join('')}
     <button type="submit">Update Rankings</button>
 </form>

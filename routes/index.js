@@ -5,12 +5,13 @@ const express = require('express'),
 /* GET home page. */
 router.get('/', async function (req, res, next) {
     const classInfoData = await surveyModel.getAllTopicData();
-    console.log("Class info", classInfoData);
+    const statusData = await surveyModel.getAllStatuses();
 
     return res.render('template', {
         locals: {
             title: 'Class Survey',
-            classInfoData
+            classInfoData,
+            statusData
         },
         partials: {
             body: 'partials/home',
@@ -19,13 +20,12 @@ router.get('/', async function (req, res, next) {
 });
 
 router.post('/', async function (req, res) {
-    const { topic_ranking_id } = req.body;
-    const response = await surveyModel.update('HTML', topic_ranking_id);
-    if (response.rowCount >= 1) {
-        res.redirect('/');
-    } else {
-        res.sendStatus(500);
+
+    for (let key in req.body) {
+        await surveyModel.update(key, req.body[key]);
     }
+    // @TODO - Put in some proper error handling if it all breaks.
+    res.redirect('/');
 });
 
 module.exports = router;
